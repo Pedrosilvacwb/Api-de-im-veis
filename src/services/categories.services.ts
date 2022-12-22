@@ -24,3 +24,14 @@ export const listAllCategoriesServices = async (): Promise<ICategory[]> => {
 
   return categories;
 };
+
+export const retrievePropertiesFromCategoryService = async (id: string) => {
+  const categoryRepo = AppDataSource.getRepository(Categories);
+  const category = await categoryRepo.findOne({
+    where: { id: id },
+    relations: { properties: true },
+  });
+  if (!category) throw new AppError('Category not Found!', 404);
+
+  return category;
+};
