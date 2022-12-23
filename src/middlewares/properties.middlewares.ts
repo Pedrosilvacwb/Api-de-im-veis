@@ -11,7 +11,11 @@ export const verifyPropertyExistsMiddleware = async (
 ) => {
   const addressRepo = AppDataSource.getRepository(Addresses);
   const address = await addressRepo.findOne({
-    where: { district: req.body.district, number: req.body.number },
+    where: {
+      district: req.body.address.district,
+      number: req.body.address.number,
+      zipCode: req.body.address.zipCode,
+    },
   });
   if (address) {
     throw new AppError('Adress Already exists!', 409);

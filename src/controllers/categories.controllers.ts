@@ -26,7 +26,6 @@ export const retrievePropertiesFromCategoryController = async (
 ) => {
   const id = req.params.id;
   const data = await retrievePropertiesFromCategoryService(id);
-  console.log(data);
 
   return res.status(200).json(data);
 };
